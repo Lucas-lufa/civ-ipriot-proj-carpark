@@ -17,11 +17,6 @@ class Sensor:
         self.client = paho.Client()
         self.client.connect(self.broker,
                             self.port)
-<<<<<<< HEAD
-        self.on_detection = None
-=======
-
->>>>>>> be07f7d6ff3831a9ef76f5b07d21a25339330c0f
 
     def on_detection(self, message):
         self.client.publish(self.topic, message)
@@ -42,12 +37,8 @@ if __name__ == '__main__':
               'port': 1883}
 
     sensor = Sensor(config)
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     sensor.on_detection = on_detection
-=======
->>>>>>> 3f81815e777a69b411e3d6f4efef1f2326ca7916
-=======
->>>>>>> be07f7d6ff3831a9ef76f5b07d21a25339330c0f
+
     print("Sensor initialized")
     sensor.start_sensing()
