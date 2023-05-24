@@ -38,6 +38,9 @@ if __name__ == '__main__':
               'port': 1883}
 
     sensor = Sensor(config)
+<<<<<<< HEAD
     sensor.on_detection = on_detection
+=======
+>>>>>>> 3f81815e777a69b411e3d6f4efef1f2326ca7916
     print("Sensor initialized")
     sensor.start_sensing()
