@@ -1,1 +1,13 @@
 paho-mqtt==1.6.1
+
+"system installed pip for python3"
+sudo apt install python3-pip
+"To list packages in pip3"
+pip3 list
+"my system, installs the package to pyhton, the --user just installs the the current user not system wide"
+pip3 install --user tomli 
+pip3 install --user paho-mqtt
+
+"these sure i already installed"
+pip3 install --user sense-hat
+pip3 install --user tkinter

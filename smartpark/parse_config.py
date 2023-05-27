@@ -22,6 +22,8 @@ spaces = 192
 toml is part of the standard library in python 3.11, otherwise you need to install tomli to parse it into a dictionary.
 ```bash
 python -m pip install tomli
+
+pip3 install --user tomli
 ```
 see [realpython.com](https://realpython.com/python-toml/) for more info.
 

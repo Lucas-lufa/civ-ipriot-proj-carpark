@@ -10,6 +10,6 @@ port = 1883
 client = paho.Client()
 # client.on_message = on_message
 client.connect(broker, port)
-client.publish("lot/sensor", "hello")
+client.publish("lot/sensor", "hello World")
 # client.subscribe("lot/sensor")
 # client.loop_forever()
