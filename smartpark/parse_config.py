@@ -28,13 +28,11 @@ pip3 install --user tomli
 see [realpython.com](https://realpython.com/python-toml/) for more info.
 
 Finally, you can use `yaml` if you prefer.
-
-
-
 """
-
-
+import tomli
 
 def parse_config(config: dict) -> dict:
     """Parse the config file and return the values as a dictionary"""
+    tomli.loads
+
     return {'location': 'TBD', 'total_spaces': 0, 'broker_host': 'TBD', 'broker_port': 0}
