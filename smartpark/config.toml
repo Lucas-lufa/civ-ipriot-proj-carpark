@@ -1,0 +1,5 @@
+name = 'super sensor'
+location = 'L306'
+topic = "lot/sensor"
+broker = 'localhost'
+port = 1883
