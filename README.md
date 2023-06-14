@@ -96,6 +96,9 @@ To install the SmartPark project as a module in development mode, follow these s
 2. Ensure you have a virtual environment activated for the project. If not, you can create one using:
 
 ```bash
+my edit
+sudo apt install python3.10-venv
+
 python3 -m venv .venv
 ```
 

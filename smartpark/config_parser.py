@@ -21,19 +21,24 @@ spaces = 192
 ```
 toml is part of the standard library in python 3.11, otherwise you need to install tomli to parse it into a dictionary.
 ```bash
-python -m pip install tomli
+
+python3 -m pip install paho-mqtt
+python3 -m pip install sense-hat
+python3 -m pip install tkinter
+python3 -m pip install tomli
+"paho-mqtt",
+        "sense-hat",
+        "tkinter",
+        "toml"
 ```
 see [realpython.com](https://realpython.com/python-toml/) for more info.
 
 Finally, you can use `yaml` if you prefer.
 
-
-
 """
-
-
+import json
 
 def parse_config(config: dict) -> dict:
-    """Parse the config file and return the values as a dictionary"""
-    # TODO: get the configuration from a parsed file
-    return {'location': 'TBD', 'total_spaces': 0, 'broker_host': 'TBD', 'broker_port': 0}
+    with open(config, "r") as f:
+        config = json.load(f)
+        return json.dumps(config)

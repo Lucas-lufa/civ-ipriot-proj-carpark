@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from config_parser import parse_config
 import mqtt_device
 import paho.mqtt.client as paho
 from paho.mqtt.client import MQTTMessage
@@ -60,6 +61,7 @@ class CarPark(mqtt_device.MqttDevice):
         payload = msg.payload.decode()
         # TODO: Extract temperature from payload
         # self.temperature = ... # Extracted value
+        self.temperature = payload
         if 'exit' in payload:
             self.on_car_exit()
         else:
@@ -67,17 +69,8 @@ class CarPark(mqtt_device.MqttDevice):
 
 
 if __name__ == '__main__':
-    config = {'name': "raf-park",
-              'total-spaces': 130,
-              'total-cars': 0,
-              'location': 'L306',
-              'topic-root': "lot",
-              'broker': 'localhost',
-              'port': 1883,
-              'topic-qualifier': 'entry',
-              'is_stuff': False
-              }
+    config = parse_config('smartpark/car-park.json')
     # TODO: Read config from file
+    print(config)
     car_park = CarPark(config)
-    print("Carpark initialized")
     print("Carpark initialized")
