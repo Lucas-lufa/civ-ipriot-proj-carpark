@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from config_parser import parse_config
 import mqtt_device
 import paho.mqtt.client as paho
 from paho.mqtt.client import MQTTMessage
@@ -37,13 +36,13 @@ class CarPark(mqtt_device.MqttDevice):
             (
                 f"TIME: {readable_time}, "
                 + f"SPACES: {self.available_spaces}, "
-                + "TEMPC: 42"
+                + f"TEMPC: {self._temperature}"
             )
         )
         message = (
             f"TIME: {readable_time}, "
             + f"SPACES: {self.available_spaces}, "
-            + "TEMPC: 42"
+            + f"TEMPC: {self._temperature}"
         )
         self.client.publish('display', message)
 
@@ -59,17 +58,29 @@ class CarPark(mqtt_device.MqttDevice):
 
     def on_message(self, client, userdata, msg: MQTTMessage):
         payload = msg.payload.decode()
+        payload = payload.split()
+        self.temperature = payload[1]
         # TODO: Extract temperature from payload
         # self.temperature = ... # Extracted value
-        self.temperature = payload
         if 'exit' in payload:
             self.on_car_exit()
         else:
             self.on_car_entry()
 
+    
 
 if __name__ == '__main__':
-    config = parse_config('smartpark/car-park.json')
+    config = CarPark.parse_config('smartpark/car-park.json')
+    # config = {'name': "raf-park",
+    #           'total-spaces': 130,
+    #           'total-cars': 0,
+    #           'location': 'L306',
+    #           'topic-root': "lot",
+    #           'broker': 'localhost',
+    #           'port': 1883,
+    #           'topic-qualifier': 'entry',
+    #           'is_stuff': False
+    #           }
     # TODO: Read config from file
     print(config)
     car_park = CarPark(config)

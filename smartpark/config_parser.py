@@ -38,7 +38,10 @@ Finally, you can use `yaml` if you prefer.
 """
 import json
 
-def parse_config(config: dict) -> dict:
-    with open(config, "r") as f:
-        config = json.load(f)
-        return json.dumps(config)
+class ConfigParser:
+
+    @staticmethod
+    def parse_config(config: dict) -> dict:
+        with open(config, "r") as f:
+            config = json.load(f) #load make a dict
+            return config

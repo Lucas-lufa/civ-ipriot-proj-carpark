@@ -1,6 +1,7 @@
 import paho.mqtt.client as paho
+from config_parser import ConfigParser
 
-class MqttDevice:
+class MqttDevice(ConfigParser):
     def __init__(self, config):
         self.name = config["name"]
         self.location = config['location']
