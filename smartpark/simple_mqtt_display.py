@@ -11,7 +11,7 @@ class Display(mqtt_device.MqttDevice):
     def display(self, *args):
         print('*' * 20)
         for val in args:
-            print(val)
+            print(val.strip())
             time.sleep(1)
         print('*' * 20)
     
