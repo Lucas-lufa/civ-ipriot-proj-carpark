@@ -29,6 +29,13 @@ class CarPark(mqtt_device.MqttDevice):
     @temperature.setter
     def temperature(self, value):
         self._temperature = value
+
+    def full_sign(self):
+        """ returns full sign if the car park is full """
+        if self.available_spaces == 0:
+            return "FULL  FULL,"
+        else:
+            return f"SPACES: {self.available_spaces}, "
         
     def _publish_event(self):
         readable_time = datetime.now().strftime('%H:%M')
@@ -41,7 +48,7 @@ class CarPark(mqtt_device.MqttDevice):
         )
         message = (
             f"TIME: {readable_time}, "
-            + f"SPACES: {self.available_spaces}, "
+            + f"{self.full_sign()}"
             + f"TEMPC:   {self._temperature}"
         )
         self.client.publish('display', message)
@@ -58,10 +65,11 @@ class CarPark(mqtt_device.MqttDevice):
 
     def on_message(self, client, userdata, msg: MQTTMessage):
         payload = msg.payload.decode()
-        payload = payload.split()
-        self.temperature = payload[1]
         # TODO: Extract temperature from payload
         # self.temperature = ... # Extracted value
+        payload_split = payload.split()
+        self.temperature = payload_split[1]
+        # DONETODO
         if 'exit' in payload:
             self.on_car_exit()
         else:
@@ -70,6 +78,7 @@ class CarPark(mqtt_device.MqttDevice):
     
 
 if __name__ == '__main__':
+    # TODO: Read config from file
     config = CarPark.parse_config('smartpark/car-park.json')
     # config = {'name': "raf-park",
     #           'total-spaces': 130,
@@ -81,6 +90,6 @@ if __name__ == '__main__':
     #           'topic-qualifier': 'entry',
     #           'is_stuff': False
     #           }
-    # TODO: Read config from file
+    # DONETODO
     car_park = CarPark(config)
     print("Carpark initialized")
