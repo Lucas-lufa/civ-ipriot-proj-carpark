@@ -5,6 +5,6 @@
 "topic-root": "lot",
 "broker": "localhost",
 "port": 1883,
-"topic-qualifier": "entry",
+"topic-qualifier": "na",
 "is_stuff": false
 }
