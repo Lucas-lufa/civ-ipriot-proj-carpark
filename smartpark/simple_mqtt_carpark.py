@@ -82,6 +82,5 @@ if __name__ == '__main__':
     #           'is_stuff': False
     #           }
     # TODO: Read config from file
-    print(config)
     car_park = CarPark(config)
     print("Carpark initialized")
