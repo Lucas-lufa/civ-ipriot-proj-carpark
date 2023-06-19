@@ -1,6 +1,6 @@
 import unittest
 import json
-from config_parser import parse_config
+from config_parser import ConfigParser
 class TestParseConfig(unittest.TestCase):
     def test_parse_config(self):
         config_string = {'name': "raf-park",
@@ -14,5 +14,6 @@ class TestParseConfig(unittest.TestCase):
               'is_stuff': False
               }
         config = json.dumps(config_string)
-        car_park = parse_config(config)
-        self.assertEqual(car_park.location,'L306')
+        car_park = ConfigParser.parse_config(config)
+        self.assertEqual(car_park['location'],'L306')
+        print(car_park,config)
