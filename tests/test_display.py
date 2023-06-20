@@ -1,0 +1,1 @@
+test_string = "TIME: 19:43, SPACES: 1, TEMPC: 18"

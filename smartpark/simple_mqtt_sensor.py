@@ -1,7 +1,6 @@
 """"Demonstrates a simple implementation of an 'event' listener that triggers
 a publication via mqtt"""
 import random
-
 import mqtt_device
 
 

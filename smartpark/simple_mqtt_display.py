@@ -20,6 +20,7 @@ class Display(mqtt_device.MqttDevice):
         print('*' * 20)
 
     def format_data(self, data):
+        """ extract enough free space to make it uniformed """
         data = data.replace(', ',',')
         data = data.replace(': ',':')
         return data
