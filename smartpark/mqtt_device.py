@@ -1,5 +1,5 @@
 import paho.mqtt.client as paho
-from config_parser import ConfigParser
+from smartpark.config_parser import ConfigParser
 
 class MqttDevice(ConfigParser):
     def __init__(self, config):

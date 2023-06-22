@@ -1,10 +1,10 @@
 """"Demonstrates a simple implementation of an 'event' listener that triggers
 a publication via mqtt"""
 import random
-import mqtt_device
+from smartpark.mqtt_device import MqttDevice
 
 
-class Sensor(mqtt_device.MqttDevice):
+class Sensor(MqttDevice):
 
     @property
     def temperature(self):

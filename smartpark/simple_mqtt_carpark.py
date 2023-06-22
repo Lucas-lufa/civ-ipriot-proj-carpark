@@ -1,11 +1,11 @@
 from datetime import datetime
 
-import mqtt_device
+from smartpark.mqtt_device import MqttDevice
 import paho.mqtt.client as paho
 from paho.mqtt.client import MQTTMessage
 
 
-class CarPark(mqtt_device.MqttDevice):
+class CarPark(MqttDevice):
     """Creates a carpark object to store the state of cars in the lot"""
 
     def __init__(self, config):
@@ -30,12 +30,12 @@ class CarPark(mqtt_device.MqttDevice):
     def temperature(self, value):
         self._temperature = value
 
-    def full_sign(self):
+    def full_sign(self,available_spaces):
         """ returns full sign if the car park is full """
-        if self.available_spaces == 0:
+        if available_spaces >= 0:
             return "FULL  FULL,"
         else:
-            return f"SPACES: {self.available_spaces}, "
+            return f"SPACES: {available_spaces}, "
         
     def _publish_event(self):
         readable_time = datetime.now().strftime('%H:%M')
@@ -48,7 +48,7 @@ class CarPark(mqtt_device.MqttDevice):
         )
         message = (
             f"TIME: {readable_time}, "
-            + f"{self.full_sign()}"
+            + f"{self.full_sign(self.available_spaces)}"
             + f"TEMPC:   {self._temperature}"
         )
         self.client.publish('display', message)
@@ -79,7 +79,6 @@ class CarPark(mqtt_device.MqttDevice):
 
 if __name__ == '__main__':
     # TODO: Read config from file
-    config = CarPark.parse_config('smartpark/car-park.json')
     # config = {'name': "raf-park",
     #           'total-spaces': 130,
     #           'total-cars': 0,
@@ -91,5 +90,6 @@ if __name__ == '__main__':
     #           'is_stuff': False
     #           }
     # DONETODO
+    config = CarPark.parse_config('smartpark/car-park.json')
     car_park = CarPark(config)
     print("Carpark initialized")
